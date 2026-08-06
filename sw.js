@@ -1,5 +1,5 @@
-const CACHE = "nsgy-call-2.0-v9";
-const CORE = ["./", "./index.html", "./styles.css", "./clinical-fields.css", "./communication-preview.css", "./reference-cleanup.css", "./data.js", "./wizard-data.js", "./recommendations-data.js", "./communication-data.js", "./app.js", "./manifest.json", "./icons/icon-192.png", "./icons/icon-512.png", "./calculators/core.js", "./calculators/gcs.js", "./calculators/abc2.js", "./calculators/ich.js", "./calculators/hunt-hess.js", "./calculators/modified-fisher.js", "./calculators/tlics.js", "./calculators/asia.js"];
+const CACHE = "nsgy-call-2.0-v10";
+const CORE = ["./", "./index.html", "./styles.css", "./clinical-fields.css", "./communication-preview.css", "./reference-cleanup.css", "./fixed-scale.css", "./data.js", "./wizard-data.js", "./recommendations-data.js", "./communication-data.js", "./app.js", "./manifest.json", "./icons/icon-192.png", "./icons/icon-512.png", "./calculators/core.js", "./calculators/gcs.js", "./calculators/abc2.js", "./calculators/ich.js", "./calculators/hunt-hess.js", "./calculators/modified-fisher.js", "./calculators/tlics.js", "./calculators/asia.js"];
 
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)));

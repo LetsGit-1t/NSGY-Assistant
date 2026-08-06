@@ -237,5 +237,7 @@ document.querySelector("#searchButton").addEventListener("click",()=>navigate("s
 document.querySelector("#contactsButton").addEventListener("click",()=>navigate("contacts"));
 document.addEventListener("submit",event=>{if(event.target.id!=="contactForm")return;event.preventDefault();const form=new FormData(event.target),contact={name:String(form.get("name")).trim(),phone:String(form.get("phone")).trim()},raw=event.target.dataset.index;if(!contact.name||!contact.phone)return;if(raw==="")state.contacts.push(contact);else state.contacts[Number(raw)]=contact;save(STORAGE.contacts,state.contacts);navigate("contacts");toast("Contact saved")});
 document.addEventListener("keydown",e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){e.preventDefault();navigate("search");}if(e.key==="Escape"&&state.route!=="home")goBack();});
+for(const gestureEvent of ["gesturestart","gesturechange","gestureend"]){document.addEventListener(gestureEvent,event=>event.preventDefault(),{passive:false})}
+document.addEventListener("touchmove",event=>{if(event.touches.length>1)event.preventDefault()},{passive:false});
 if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js"));
 render();
