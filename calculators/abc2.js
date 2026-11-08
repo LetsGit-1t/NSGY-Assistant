@@ -42,15 +42,21 @@ registerCalculator({
   calculate(v) {
     const a = +v.a || 0,
       b = +v.b || 0,
-      c = (+v.slices || 0) * (+v.thickness || 0),
-      volume = (a * b * c) / 2;
+      slices = +v.slices || 0,
+      thickness = +v.thickness || 0;
+      
+      const valid = a > 0 && b > 0 && slices > 0 && thickness > 0
 
-    if (volume > 0) CALC_CONTEXT.volume = volume;
+      const c = slices * thickness
+
+      const volume = valid ? ((a * b * c) / 2) : null;
+
+    CALC_CONTEXT.volume = volume;
 
     return {
-      score: volume ? volume.toFixed(1) : "—",
+      score: volume > 0 ? volume.toFixed(1) : "—",
       unit: "mL",
-      label: volume ? `C = ${c.toFixed(1)} cm` : "Enter all four measurements",
+      label: volume > 0 ? `C = ${c.toFixed(1)} cm` : "Enter all four measurements",
       interpretation: "Estimated intraparenchymal hematoma volume.",
       details: [
         "Calculated as A × B × C ÷ 2.",
