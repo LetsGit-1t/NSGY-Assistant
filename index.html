@@ -72,6 +72,10 @@
     <script src="communication-data.js"></script>
     <script src="calculators/core.js"></script>
     <script src="calculators/gcs.js"></script>
+    <script type="module">
+      import { calculateABC2Volume } from "./calculators/abc2_math.js";
+      window.calculateABC2Volume = calculateABC2Volume;
+    </script>
     <script src="calculators/abc2.js"></script>
     <script src="calculators/ich.js"></script>
     <script src="calculators/hunt-hess.js"></script>
