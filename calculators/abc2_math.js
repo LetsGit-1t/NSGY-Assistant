@@ -10,12 +10,18 @@ function calculateABC2Volume(a, b, slices, thickness) {
     thickness > 0;
 
   if (!valid) {
-    return null;
+    return { c: null, volume: null };
   }
 
   const c = slices * thickness;
 
   const volume = (a * b * c) / 2;
 
-  return volume;
+  if (!Number.isFinite(c) || !Number.isFinite(volume)) {
+    return { c: null, volume: null }
+  }
+
+  return { c, volume };
 }
+
+export { calculateABC2Volume }
