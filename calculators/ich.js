@@ -1,3 +1,5 @@
+import { registerCalculator, CALC_CONTEXT } from "./core.js";
+
 registerCalculator({
   id: "ich",
   icon: "●",
