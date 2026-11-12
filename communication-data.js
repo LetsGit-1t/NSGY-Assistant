@@ -1,5 +1,5 @@
 /* Data-driven communication fields. Draft clinical data remains memory-only. */
-const COMM_FIELDS = {
+export const COMM_FIELDS = {
   age: {
     label: "Age",
     placeholder: "74",
