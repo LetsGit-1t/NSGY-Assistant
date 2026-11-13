@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { calculateGCS } from "../gcs_math";
+import { calculateGCS } from "../calculators/gcs_math.js";
 
 describe("calculateGCS functionality", () => {
   it("calculates a normal maximum GCS", () => {

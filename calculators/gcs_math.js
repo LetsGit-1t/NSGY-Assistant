@@ -1,44 +1,33 @@
-export function calculateGCS(eyes, verbal, motor, intubated = false ) {
-	//Validate inputs
-	const valid_e = Number.isInteger(eyes) && Number(eyes) > 0 && Number(eyes) < 5
-	const valid_v = Number.isInteger(verbal) && Number(verbal) > 0 && Number(verbal) < 6
-	const valid_m = Number.isInteger(motor) && Number(motor) > 0 && Number(motor) < 7
-	//Determine verbal testable (i.e. intubated)
-	let verbal_score = {
-		if (intubated) {
-			verbal_score = 1
-		}
-		else {
-		verbal_score = valid_v
-	}
-	}
+export function calculateGCS(eyes, verbal, motor, intubated = false) { //Validate inputs
+  const valid_e = Number.isInteger(eyes) && eyes > 0 && eyes < 5;
+  const valid_v = Number.isInteger(verbal) && verbal > 0 && verbal < 6;
+  const valid_m = Number.isInteger(motor) && motor > 0 && motor < 7;
+  //Determine verbal testable (i.e. intubated)
 
-	//calculate total
-	if (!valid_e) {
-		valid_e = null
-	}
-	
-	if (!valid_v) {
-		valid_v = null
-	}
-	
-	if (!valid_m) {
-		valid_m = null
-	}
+  let verbal_score = intubated ? 1 : verbal;
 
-	const total = valid_e + valid_v + verbal_score;
+  // 2. Reject invalid inputs
+  if (typeof intubated !== "boolean") {
+    return null;
+  }
 
-	//generate display
-	const result = intubated ? '${total}T' : total;
-	//return result
-	return {
-		total: total,
-		display: result,
-		components: {
-			eye: eyes,
-			verbal: verbal_score,
-			motor: motor,
-		},
-		intubated: intubated,
-	}
+  if (!valid_e || !valid_m || (!intubated && !valid_v)) {
+    return null;
+  }
+
+  const total = eyes + verbal_score + motor;
+
+  //generate display
+  const display = intubated ? `${total}T` : `${total}`;
+  //return result
+  return {
+    total: total,
+    display: display,
+    components: {
+      eye: eyes,
+      verbal: verbal_score,
+      motor: motor,
+    },
+    intubated: intubated,
+  };
 }

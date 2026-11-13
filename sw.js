@@ -1,4 +1,5 @@
-const CACHE = "nsgy-call-2.0-v10";
+const CACHE_PREFIX = "nsgy-call-";
+const CACHE = `${CACHE_PREFIX}2.0-v11`;
 const CORE = [
   "./",
   "./index.html",
@@ -17,7 +18,9 @@ const CORE = [
   "./icons/icon-512.png",
   "./calculators/core.js",
   "./calculators/gcs.js",
+  "./calculators/gcs_math.js",
   "./calculators/abc2.js",
+  "./calculators/abc2_math.js",
   "./calculators/ich.js",
   "./calculators/hunt-hess.js",
   "./calculators/modified-fisher.js",
@@ -35,7 +38,9 @@ self.addEventListener("activate", (event) => {
       .keys()
       .then((keys) =>
         Promise.all(
-          keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)),
+          keys
+            .filter((k) => k.startsWith(CACHE_PREFIX) && k !== CACHE)
+            .map((k) => caches.delete(k)),
         ),
       )
       .then(() => self.clients.claim()),
@@ -53,7 +58,11 @@ self.addEventListener("fetch", (event) => {
             caches.open(CACHE).then((cache) => cache.put(event.request, copy));
             return response;
           })
-          .catch(() => caches.match("./index.html")),
+          .catch(() =>
+            event.request.mode === "navigate"
+              ? caches.match("./index.html")
+              : Response.error(),
+          ),
     ),
   );
 });

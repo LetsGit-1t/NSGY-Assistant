@@ -1,5 +1,5 @@
 import { registerCalculator, CALC_CONTEXT } from "./core.js";
-import { calculateGCS } from "../gcs_math.js";
+import { calculateGCS } from "./gcs_math.js";
 
 registerCalculator(
   {
