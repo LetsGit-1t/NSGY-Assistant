@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "nsgy-call-";
-const CACHE = `${CACHE_PREFIX}2.0-v11`;
+const CACHE = `${CACHE_PREFIX}2.0-v14`;
 const CORE = [
   "./",
   "./index.html",
@@ -8,6 +8,7 @@ const CORE = [
   "./communication-preview.css",
   "./reference-cleanup.css",
   "./fixed-scale.css",
+  "./utils.js",
   "./data.js",
   "./wizard-data.js",
   "./recommendations-data.js",
@@ -22,6 +23,7 @@ const CORE = [
   "./calculators/abc2.js",
   "./calculators/abc2_math.js",
   "./calculators/ich.js",
+  "./calculators/ich_math.js",
   "./calculators/hunt-hess.js",
   "./calculators/modified-fisher.js",
   "./calculators/tlics.js",

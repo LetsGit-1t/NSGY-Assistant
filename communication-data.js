@@ -287,7 +287,7 @@ export const COMM_FIELDS = {
   },
 };
 
-const COMM_DEFAULT = [
+export const COMM_DEFAULT = [
   "age",
   "sex",
   "diagnosis",
@@ -300,7 +300,7 @@ const COMM_DEFAULT = [
   "notes",
 ];
 
-const COMM_WORKFLOWS = {
+export const COMM_WORKFLOWS = {
   "traumatic-bleed": [
     "age",
     "sex",

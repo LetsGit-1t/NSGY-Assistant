@@ -2,8 +2,9 @@
 
 import { DATA } from "./data.js";
 import { WIZARD_FLOWS } from "./wizard-data.js";
-import { COMM_FIELDS } from "./communication-data.js";
+import { COMM_FIELDS, COMM_WORKFLOWS, COMM_DEFAULT } from "./communication-data.js";
 import { RECOMMENDATIONS } from "./recommendations-data.js";
+import { escapeHTML } from "./utils.js";
 
 import {
   CALCULATORS,
@@ -22,7 +23,6 @@ import "./calculators/hunt-hess.js";
 import "./calculators/ich.js";
 import "./calculators/modified-fisher.js";
 import "./calculators/tlics.js";
-
 
 const STORAGE = {
   favorites: "nsgy2:favorites",
@@ -79,20 +79,6 @@ async function copyText(value) {
   area.select();
   document.execCommand("copy");
   area.remove();
-}
-
-function escapeHTML(value = "") {
-  return String(value).replace(
-    /[&<>'"]/g,
-    (c) =>
-      ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        "'": "'",
-        '"': "&quot;",
-      })[c],
-  );
 }
 
 function workflowPayload() {
@@ -563,7 +549,14 @@ function renderContactEditor(index) {
 
 function communicationDefaults(id, focus) {
   const item = byId[id],
-    values = { diagnosis: focus || item.title };
+    values = { diagnosis: focus || item?.title };
+
+  if (!item) {
+    console.warn("Missing Communication Item:",{
+      id,
+      focus,
+    });
+  }
   const calcParts = CALCULATORS.filter(
     (calc) => calc.workflows.includes(id) && CALC_STATE[calc.id],
   ).map((calc) => {
@@ -1418,9 +1411,13 @@ document.addEventListener(
   { passive: false },
 );
 
-if ("serviceWorker" in navigator) {
+const isLocalDev = ["localhost", "127.0.0.1"].includes(
+  window.location.hostname
+);
+
+if ("serviceWorker" in navigator && !isLocalDev) {
   window.addEventListener("load", () =>
-    navigator.serviceWorker.register("sw.js"),
+    navigator.serviceWorker.register("./sw.js"),
   );
 }
 

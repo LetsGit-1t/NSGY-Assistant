@@ -1,3 +1,5 @@
+import { escapeHTML } from "../utils.js";
+
 export const CALCULATORS = [];
 export const CALC_STATE = {};
 export const CALC_CONTEXT = { gcs: null, volume: null };
