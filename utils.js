@@ -6,7 +6,7 @@ export function escapeHTML(value = "") {
         "&": "&amp;",
         "<": "&lt;",
         ">": "&gt;",
-        "'": "'",
+        "'": "&#39;",
         '"': "&quot;",
       })[c],
   );
